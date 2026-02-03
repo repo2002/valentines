@@ -28,6 +28,17 @@ body {
     transition: opacity 0.5s ease-out;
 }
 
+#loading-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: linear-gradient(135deg, #ffe4e6, #fdf2f8, #ffe4e6);
+}
+
+#container.loading {
+    z-index: 51;
+}
+
 #container {
     min-height: 100vh;
     position: relative;
@@ -61,7 +72,7 @@ h3 {
     color: #3f0715;
     margin-bottom: 0rem;
     margin-top: 0rem;
-    
+
 }
 
 #message {
@@ -134,15 +145,21 @@ h3 {
     50% { transform: translateY(-8px); }
 }
 
-/* Flowers - stay behind text, don't block clicks */
+/* Flowers - stay behind text, don't block clicks, slow movement */
 .flower {
     position: absolute;
     opacity: 0.75;
-    animation: float 8s ease-in-out infinite;
+    animation: float 16s ease-in-out infinite;
     pointer-events: none;
+    transition: left 2.8s ease-out, top 2.8s ease-out;
+}
+
+.flower.forming-circle {
+    animation: none;
+    transition: left 1.2s ease-out, top 1.2s ease-out;
 }
 
 @keyframes float {
     0%,100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-8px) rotate(2deg); }
+    50% { transform: translateY(-6px) rotate(2deg); }
 }

@@ -46,12 +46,36 @@ function moveNo() {
 noBtn.addEventListener("mouseenter", moveNo);
 noBtn.addEventListener("touchstart", moveNo);
 
-// Yes button
+// Yes button: loading screen with flowers in a circle for 2s, then acceptance screen
+const LOADING_DURATION = 2000;
+const loadingOverlay = document.getElementById("loading-overlay");
+const centerX = 50;
+const centerY = 50;
+const circleRadius = 32;
+
 yesBtn.addEventListener("click", () => {
   clapsAudio.play();
-  content.hidden = true;
   noBtn.hidden = true;
-  success.hidden = false;
+  yesBtn.hidden = true;
+  content.hidden = true;
+  loadingOverlay.hidden = false;
+  content.parentElement.classList.add("loading");
+
+  const flowers = Array.from(flowersEl.querySelectorAll(".flower"));
+  const n = flowers.length;
+
+  flowers.forEach((flower, i) => {
+    flower.classList.add("forming-circle");
+    const angle = (i / n) * 2 * Math.PI - Math.PI / 2;
+    flower.style.left = centerX + circleRadius * Math.cos(angle) + "%";
+    flower.style.top = centerY + circleRadius * Math.sin(angle) + "%";
+  });
+
+  setTimeout(() => {
+    loadingOverlay.hidden = true;
+    content.parentElement.classList.remove("loading");
+    success.hidden = false;
+  }, LOADING_DURATION);
 });
 
 // Flowers - place only outside center so they don't cover the text
@@ -76,7 +100,7 @@ for (let i = 0; i < 12; i++) {
   f.className = "flower";
   f.style.left = left + "%";
   f.style.top = top + "%";
-  f.style.animationDuration = 6 + Math.random() * 4 + "s";
+  f.style.animationDuration = 14 + Math.random() * 6 + "s";
   f.innerHTML = `
 <svg width="40" height="40" viewBox="0 0 64 64">
     <!-- Petals -->

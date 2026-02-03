@@ -1,4 +1,5 @@
-const MESSAGE = "Will you be my Valentine? Every day with you feels special 💕";
+const MESSAGE =
+  "Will you be my Valentine? I really like spending time with you.";
 const SPEED = 55;
 
 const messageEl = document.getElementById("message");

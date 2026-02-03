@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    font-family: 'Dancing Script', cursive;
+    background: linear-gradient(135deg, #ffe4e6, #fdf2f8, #ffe4e6);
+    overflow: hidden;
+}
+
+#container {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+h1, h2 {
+    font-family: 'Great Vibes', cursive;
+    color: #be123c;
+}
+
+#message {
+    font-size: 1.8rem;
+    min-height: 4rem;
+    color: #9f1239;
+}
+
+.hint {
+    font-size: 1rem;
+    color: #9f1239;
+}
+
+#yes-btn {
+    margin-top: 2rem;
+    padding: 1rem 2.5rem;
+    font-size: 2rem;
+    border: none;
+    border-radius: 1.5rem;
+    background: linear-gradient(90deg, #f43f5e, #ec4899);
+    color: white;
+    cursor: pointer;
+}
+
+#yes-btn:hover {
+    transform: scale(1.05);
+}
+
+#no-btn {
+    position: fixed;
+    padding: 0.6rem 1.2rem;
+    font-size: 1.2rem;
+    border-radius: 1rem;
+    border: 2px solid #fda4af;
+    background: white;
+    color: #be123c;
+    cursor: pointer;
+}
+
+#music-btn {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+    padding: 0.4rem 0.8rem;
+    border-radius: 1rem;
+    border: none;
+    background: white;
+    cursor: pointer;
+}
+
+#success img {
+    max-width: 300px;
+    margin: 1rem auto;
+}
+
+.emoji {
+    font-size: 2rem;
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* Flowers */
+.flower {
+    position: absolute;
+    opacity: 0.8;
+    animation: float ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+}

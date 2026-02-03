@@ -5,6 +5,29 @@ body {
     overflow: hidden;
 }
 
+#tap-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ffe4e6, #fdf2f8, #ffe4e6);
+    cursor: pointer;
+}
+
+#tap-overlay p {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    color: #be123c;
+}
+
+#tap-overlay.hidden {
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
 #container {
     min-height: 100vh;
     position: relative;
@@ -14,7 +37,21 @@ body {
     text-align: center;
 }
 
+#content,
+#success {
+    position: relative;
+    z-index: 2;
+}
+
+#flowers {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
 h1, h2 {
+    font-size: 4rem;
     font-family: 'Great Vibes', cursive;
     color: #be123c;
 }
@@ -22,16 +59,17 @@ h1, h2 {
 #message {
     font-size: 1.8rem;
     min-height: 4rem;
+    max-width: 300px;
+    margin-bottom: 0rem;
     color: #9f1239;
 }
 
 .hint {
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: #9f1239;
 }
 
 #yes-btn {
-    margin-top: 2rem;
     padding: 1rem 2.5rem;
     font-size: 2rem;
     border: none;
@@ -45,8 +83,20 @@ h1, h2 {
     transform: scale(1.05);
 }
 
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+#yes-btn {
+    margin-top: 0;
+}
+
 #no-btn {
-    position: fixed;
     padding: 0.6rem 1.2rem;
     font-size: 1.2rem;
     border-radius: 1rem;
@@ -56,20 +106,13 @@ h1, h2 {
     cursor: pointer;
 }
 
-#music-btn {
+#no-btn.runaway {
     position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: 10;
-    padding: 0.4rem 0.8rem;
-    border-radius: 1rem;
-    border: none;
-    background: white;
-    cursor: pointer;
+    z-index: 5;
 }
 
 #success img {
-    max-width: 300px;
+    max-width: 500px;
     margin: 1rem auto;
 }
 
@@ -83,11 +126,12 @@ h1, h2 {
     50% { transform: translateY(-8px); }
 }
 
-/* Flowers */
+/* Flowers - stay behind text, don't block clicks */
 .flower {
     position: absolute;
     opacity: 0.75;
     animation: float 8s ease-in-out infinite;
+    pointer-events: none;
 }
 
 @keyframes float {

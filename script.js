@@ -6,11 +6,13 @@ const yesBtn = document.getElementById("yes-btn");
 const noBtn = document.getElementById("no-btn");
 const success = document.getElementById("success");
 const content = document.getElementById("content");
-const musicBtn = document.getElementById("music-btn");
 const audio = document.getElementById("bg-music");
+const clapsAudio = document.getElementById("claps");
 const flowersEl = document.getElementById("flowers");
+const tapOverlay = document.getElementById("tap-overlay");
 
 let index = 0;
+let typewriterStarted = false;
 
 // Typewriter
 function type() {
@@ -19,35 +21,60 @@ function type() {
     setTimeout(type, SPEED);
   }
 }
-type();
 
-// No button runs away
+// Start music and content on first tap (browsers require user gesture for audio)
+function startExperience() {
+  if (typewriterStarted) return;
+  typewriterStarted = true;
+  audio.play().catch(() => {});
+  tapOverlay.classList.add("hidden");
+  setTimeout(() => tapOverlay.remove(), 500);
+  type();
+}
+
+tapOverlay.addEventListener("click", startExperience);
+tapOverlay.addEventListener("touchstart", startExperience, { passive: true });
+
+// No button runs away (only to edges, never on the text)
 function moveNo() {
-  noBtn.style.left = Math.random() * 80 + 10 + "%";
-  noBtn.style.top = Math.random() * 80 + 10 + "%";
+  noBtn.classList.add("runaway");
+  const { left, top } = randomOutsideCenter();
+  noBtn.style.left = left + "%";
+  noBtn.style.top = top + "%";
 }
 noBtn.addEventListener("mouseenter", moveNo);
 noBtn.addEventListener("touchstart", moveNo);
 
 // Yes button
 yesBtn.addEventListener("click", () => {
+  clapsAudio.play();
   content.hidden = true;
   noBtn.hidden = true;
   success.hidden = false;
 });
 
-// Music
-musicBtn.addEventListener("click", () => {
-  audio.play();
-  musicBtn.remove();
-});
+// Flowers - place only outside center so they don't cover the text
+function randomOutsideCenter() {
+  const centerMin = 25;
+  const centerMax = 65;
+  let left, top;
+  do {
+    left = Math.random() * 90 + 5;
+    top = Math.random() * 90 + 5;
+    // Keep flowers in the "frame": outside the center box
+    const inCenterX = left >= centerMin && left <= centerMax;
+    const inCenterY = top >= centerMin && top <= centerMax;
+    if (!inCenterX || !inCenterY) break;
+  } while (true);
+  return { left, top };
+}
 
-// Flowers
 for (let i = 0; i < 12; i++) {
+  const { left, top } = randomOutsideCenter();
   const f = document.createElement("div");
   f.className = "flower";
-  f.style.left = Math.random() * 90 + "%";
-  f.style.top = Math.random() * 90 + "%";
+  f.style.left = left + "%";
+  f.style.top = top + "%";
   f.style.animationDuration = 6 + Math.random() * 4 + "s";
   f.innerHTML = `
 <svg width="40" height="40" viewBox="0 0 64 64">

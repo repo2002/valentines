@@ -86,9 +86,8 @@ h1, h2 {
 /* Flowers */
 .flower {
     position: absolute;
-    opacity: 0.8;
-    animation: float ease-in-out infinite;
-    pointer-events: none;
+    opacity: 0.75;
+    animation: float 8s ease-in-out infinite;
 }
 
 @keyframes float {

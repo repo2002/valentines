@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Will you be my Valentine?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link href="https://fonts.bunny.net/css?family=great-vibes:400|dancing-script:400,600" rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<audio id="bg-music" src="audio/valentine.mp3" loop preload="auto"></audio>
+
+<button id="music-btn">🔊 Play music</button>
+
+<div id="container">
+    <!-- Flowers -->
+    <div id="flowers"></div>
+
+    <!-- Main content -->
+    <div id="content">
+        <h1>For Yael</h1>
+
+        <p id="message"></p>
+        <p class="hint">(Try to click on the no button 🤪)</p>
+
+        <button id="yes-btn">Yes! 💕</button>
+    </div>
+
+    <button id="no-btn">No</button>
+
+    <!-- Success -->
+    <div id="success" hidden>
+        <h2>You said yes!</h2>
+        <img src="gifs/part.gif" alt="Celebration" />
+        <p>I can’t wait to celebrate with you! 💕</p>
+        <p class="hint">(No was not an option 🤪)</p>
+        <div class="emoji">🌹💕🌹</div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
